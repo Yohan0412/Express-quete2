@@ -14,15 +14,28 @@ app.get("/", welcome);
 
 const movieHandlers = require("./movieHandlers");
 
+
+
 app.get("/api/movies", movieHandlers.getMovies);
 app.get("/api/movies/:id", movieHandlers.getMovieById);
 app.get("/api/users", movieHandlers.getUsers);
 app.get("/api/users/:id", movieHandlers.getUsersById);
+
+// AJOUTEZ ------------------------------------------------------------------------------------------------------------------------
+
 app.post("/api/movies", movieHandlers.postMovie);
 app.post("/api/users", movieHandlers.postUsers);
 
+// UPDATE ------------------------------------------------------------------------------------------------------------------------
+
 // app.put("/api/movies/:id", movieHandlers.updateMovie);
 app.put("/api/users/:id", movieHandlers.updateUser);
+
+// DELETE -----------------------------------------------------------------------------------------------------------------
+
+// app.delete("/api/movies/:id", movieHandlers.deleteMovie);
+app.delete("/api/users/:id", movieHandlers.deleteUser);
+
 
 
 app.listen(port, (err) => {
