@@ -93,6 +93,45 @@ const getMovieById = (req, res) => {
 
 
 
+// METHODE POSTE
+
+const postMovie = (req, res) => {
+    const { title, director, year, color, duration } = req.body;
+  
+    database
+      .query(
+        "INSERT INTO movies(title, director, year, color, duration) VALUES (?, ?, ?, ?, ?)", // remplacer par le module mysql2
+        [title, director, year, color, duration]
+      )
+      .then(([result]) => { // c'est là que nous obtenions précédemment les lignes sélectionnées lors de l'exécution d'une requête SELECT
+        res.location(`/api/movies/${result.insertId}`).sendStatus(201); // https://www.restapitutorial.com/lessons/httpmethods.html
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error saving the movie");
+      });
+  };
+    
+
+  const postUsers = (req, res) => {
+    const { firstname, lastname, email, city, language } = req.body;
+  
+    database
+      .query(
+        "INSERT INTO users(firstname, lastname, email, city, language) VALUES (?, ?, ?, ?, ?)", // remplacer par le module mysql2
+        [firstname, lastname, email, city, language]
+      )
+      .then(([result]) => { // c'est là que nous obtenions précédemment les lignes sélectionnées lors de l'exécution d'une requête SELECT
+        res.location(`/api/users/${result.insertId}`).sendStatus(201); // https://www.restapitutorial.com/lessons/httpmethods.html
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error saving the Users");
+      });
+  };
+
+
+
 
 
 
@@ -101,4 +140,6 @@ module.exports = {
   getMovieById,
   getUsers,
   getUsersById,
+  postMovie,
+  postUsers,
 };
