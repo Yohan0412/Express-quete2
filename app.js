@@ -24,7 +24,7 @@ app.get("/api/users/:id", movieHandlers.getUsersById);
 // AJOUTEZ ------------------------------------------------------------------------------------------------------------------------
 
 app.post("/api/movies", movieHandlers.postMovie);
-app.post("/api/users", movieHandlers.postUsers);
+// app.post("/api/users", movieHandlers.postUsers);
 
 // UPDATE ------------------------------------------------------------------------------------------------------------------------
 
@@ -35,6 +35,12 @@ app.put("/api/users/:id", movieHandlers.updateUser);
 
 // app.delete("/api/movies/:id", movieHandlers.deleteMovie);
 app.delete("/api/users/:id", movieHandlers.deleteUser);
+
+
+
+const { hashPassword } = require("./auth.js");
+
+app.post("/api/users", hashPassword, movieHandlers.postUsers);
 
 
 

@@ -114,12 +114,12 @@ const postMovie = (req, res) => {
     
 
   const postUsers = (req, res) => {
-    const { firstname, lastname, email, city, language } = req.body;
+    const { firstname, lastname, email, city, language, hashedPassword } = req.body;
   
     database
       .query(
-        "INSERT INTO users(firstname, lastname, email, city, language) VALUES (?, ?, ?, ?, ?)", // remplacer par le module mysql2
-        [firstname, lastname, email, city, language]
+        "INSERT INTO users(firstname, lastname, email, city, language, hashedPassword) VALUES (?, ?, ?, ?, ?, ?)", // remplacer par le module mysql2
+        [firstname, lastname, email, city, language, hashedPassword]
       )
       .then(([result]) => { // c'est là que nous obtenions précédemment les lignes sélectionnées lors de l'exécution d'une requête SELECT
         res.location(`/api/users/${result.insertId}`).sendStatus(201); // https://www.restapitutorial.com/lessons/httpmethods.html
